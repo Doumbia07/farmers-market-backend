@@ -18,7 +18,7 @@ API REST développée avec **Laravel 13** et **PHP 8.3+**.
 
 - PHP 8.3+
 - Composer
-- MySQL / MariaDB
+- MySQL 
 - Laravel 13
 
 ## Installation
