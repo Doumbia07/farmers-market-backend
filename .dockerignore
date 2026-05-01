@@ -1,0 +1,13 @@
+.git
+.env
+vendor
+node_modules
+storage/*
+!storage/.gitkeep
+tests
+*.log
+*.sqlite
+Dockerfile
+Caddyfile
+.dockerignore
+README.md
