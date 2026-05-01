@@ -1,28 +1,32 @@
 FROM dunglas/frankenphp:php8.4-bookworm
 
-# Installer les dépendances système (git, unzip, zip) et l'extension PHP zip
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
     zip \
-    && docker-php-ext-install zip \
+    libzip-dev \
+    && docker-php-ext-install zip pdo_mysql \
     && apt-get clean
 
-# Copie des fichiers du projet
+# Copy project files
 COPY . /app
 WORKDIR /app
 
-# Téléchargement de Composer
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Installation des dépendances PHP
-RUN composer install --optimize-autoloader --no-interaction --no-progress
+# Install PHP dependencies
+RUN composer install --optimize-autoloader --no-interaction --no-progress --no-scripts
 
-# Permissions sur les dossiers de stockage
+# Generate key and run post-autoload-dump
+RUN composer run-script post-autoload-dump --no-interaction || true
+
+# Create storage folders and set permissions
 RUN mkdir -p storage/framework/{sessions,views,cache} bootstrap/cache && chmod -R 775 storage bootstrap/cache
 
-# Exposition du port
+# Expose port
 EXPOSE 8000
 
-# Lancement avec FrankenPHP
+# Start server
 CMD ["frankenphp", "run", "--config", "/app/Caddyfile"]

@@ -1,5 +1,5 @@
-.git
 .env
+.git
 vendor
 node_modules
 storage/*
@@ -11,3 +11,4 @@ Dockerfile
 Caddyfile
 .dockerignore
 README.md
+.gitignore
