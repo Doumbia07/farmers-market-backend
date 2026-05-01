@@ -1,0 +1,7 @@
+{
+    server {
+        listen 8000
+        root /app/public
+        php_fastcgi /
+    }
+}
