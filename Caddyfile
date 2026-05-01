@@ -1,7 +1,7 @@
-{$PORT:8000} {
-             root * /app/public
-             php_fastcgi /app/public
-             file_server
-             try_files {path} {path}/ /index.php?{query}
-             encode gzip
-             }
+:8000 {
+    root * /app/public
+    php_fastcgi /app/public
+    file_server
+    try_files {path} {path}/ /index.php?{query}
+    encode gzip
+}

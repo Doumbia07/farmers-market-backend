@@ -7,8 +7,5 @@ storage/*
 tests
 *.log
 *.sqlite
-Dockerfile
-Caddyfile
-.dockerignore
 README.md
 .gitignore
